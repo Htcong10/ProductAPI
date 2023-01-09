@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using ProductAPI.Models;
 using ProductAPI.ModelRequest;
+using ProductAPI.Service;
+using ProductAPI.ViewModel;
 
 namespace ProductAPI.Controllers
 {
@@ -12,15 +14,40 @@ namespace ProductAPI.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        private readonly DataDbcontext _context;
-        private readonly IMapper _mapper;
-        public CategoryController(DataDbcontext product,
-            IMapper mapper)
+        private readonly ICategoryService _service;
+        public CategoryController(ICategoryService service)
         {
-            _context = product;
-            _mapper = mapper;
+            _service = service;
         }
         [AllowAnonymous]
+        [HttpPost("CreateCategory")]
+        public ResponsePostView CreateProduct([FromBody] CreateCategoryModel request)
+        {
+            var result = _service.CreateCategory(request);
+            return result;
+        }
+        [AllowAnonymous]
+        [HttpPost("UpdateCategory")]
+        public ResponsePostView UpdateCategory([FromBody] CreateCategoryModel request)
+        {
+            var result = _service.UpdateCategory(request);
+            return result;
+        }
+        [AllowAnonymous]
+        [HttpPost("DeleteCategory")]
+        public ResponsePostView DeleteCategory(int categoryId)
+        {
+            var result = _service.DeleteCategory(categoryId);
+            return result;
+        }
+        [AllowAnonymous]
+        [HttpPost("GetAllCategory")]
+        public ResponseViewModel GetAllCategory()
+        {
+            var result = _service.GetAllCategory();
+            return result;
+        }
+        /*[AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
         public IActionResult GetReviewers()
@@ -129,6 +156,6 @@ namespace ProductAPI.Controllers
             }
 
             return NoContent();
-        }
+        }*/
     }
 }

@@ -2,7 +2,7 @@
 
 public class Customer
 {
-    public Guid CustomerId { get; set; }
+    public int CustomerId { get; set; }
     public string Name { get; set;}
     public DateTime birthay { get; set; }
     public string address { get; set;}

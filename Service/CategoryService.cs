@@ -4,14 +4,14 @@ using ProductAPI.ViewModel;
 
 namespace ProductAPI.Service
 {
-    public interface ICategoryServivce
+    public interface ICategoryService
     {
         ResponsePostView CreateCategory(CreateCategoryModel request);
         ResponsePostView UpdateCategory(CreateCategoryModel request);
         ResponsePostView DeleteCategory(int categoryId);
         ResponseViewModel GetAllCategory();
     }
-    public class CategoryService : ICategoryServivce
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
 
